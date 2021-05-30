@@ -41,10 +41,10 @@
                         <p class="text-indigo-500 text-sm text-right m-5">Balance: BTC {{crypto_wallet["balance"]}}</p>
                      </div>
                      <div class="flex items-center justify-start">
-                        <button id="send-btn" class="bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded mr-4 w-full" type="button">
+                        <button id="buy-btn" class="bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded mr-4 w-full" type="button">
                         Buy
                         </button>
-                        <button id="send-btn" class="bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded mr-4 w-full" type="button">
+                        <button id="sell-btn" class="bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded mr-4 w-full" type="button">
                         Sell
                         </button>
                      </div><p class="text-red-300 lg:my-4 invisible" id="transfer-error"></p>
@@ -59,4 +59,6 @@
    </div>
 </div>
 </main>
+<script src="{{url_for('static', filename='ajax.js')}}"></script>
+<script src="{{url_for('static', filename='exchange.js')}}"></script>
 {% endblock content %}

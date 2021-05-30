@@ -1,3 +1,4 @@
+from exchange import Exchange
 import database
 from cryptocurrency import Cryptocurrency
 from flask import Flask, render_template, request, redirect, session
@@ -14,6 +15,7 @@ app.secret_key = b"\xc4\xf8\x9d\xa8\xf7\xbc\t \x8f\xb6l\xea\xc5H\xfet"
 user_accounts = database.connect()["bank"]["customers"]
 
 def login_required(f):
+    """ Make sure that user is logged in before proceeding. """
     @wraps(f)
     def wrap(*args, **kwargs):
         if "logged_in" in session:
@@ -49,10 +51,20 @@ def user_logout():
 @login_required
 def cryptocurrency():
     crypto_wallet = database.connect()["bank"]["crypto_wallets"].find_one({"_id": ObjectId(session["user"]["crypto_wallet"])})
+    #bank_account = database.connect()["bank"]["bank_accounts"].find_one({"_id": ObjectId(session["user"]["bank_account"])})
     priceData = Cryptocurrency().get_data()
+    #Exchange.sell(bank_account["_id"], crypto_wallet["_id"], 0.0010799999999999998)
     return render_template("cryptocurrency.html", priceData=priceData, crypto_wallet=crypto_wallet)
 
+@app.route('/dashboard/cryptocurrency/buy', methods=["POST"])
+@login_required
+def cryptocurrency_buy():
+    return Exchange.buy(ObjectId(session["user"]["bank_account"]), ObjectId(session["user"]["crypto_wallet"]))
 
+@app.route('/dashboard/cryptocurrency/sell', methods=["POST"])
+@login_required
+def cryptocurrency_sell():
+    return Exchange.sell(ObjectId(session["user"]["bank_account"]), ObjectId(session["user"]["crypto_wallet"]))
 
 @app.route('/dashboard/loans', methods=["GET", "POST"])
 @login_required
