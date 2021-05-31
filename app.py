@@ -24,7 +24,7 @@ def login_required(f):
     return wrap
 
 @app.route('/', methods=["GET"])
-def user_login():
+def index_page():
     return redirect("/user/login")
 
 @app.route('/dashboard', methods=["GET", "POST"])
