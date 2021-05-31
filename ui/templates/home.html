@@ -66,7 +66,7 @@
                         <div class="text-sm text-indigo-400 transaction-receiver">{{crypto_wallet["address"]}}</div>
                      </td>
                      <td class="hidden md:table-cell lg:table-cell xl:table-cell 2xl:table-cell px-6 py-4 whitespace-nowrap text-sm text-indigo-400 transaction-date">
-                     BTC {{crypto_wallet["balance"]}}
+                     BTC {{crypto_wallet["balance"]|round(6, 'floor')}}
                      </td>
                   </tr>
                </tbody>
