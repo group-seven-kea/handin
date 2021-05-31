@@ -23,6 +23,10 @@ def login_required(f):
         return redirect("/user/login")
     return wrap
 
+@app.route('/', methods=["GET"])
+def user_login():
+    return redirect("/user/login")
+
 @app.route('/dashboard', methods=["GET", "POST"])
 @login_required
 def dashboard():
