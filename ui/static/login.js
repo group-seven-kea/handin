@@ -9,9 +9,10 @@ $("#submit-btn").click((e) => {
         dataType: "json",
         success: (res) => {
             window.location.href = "/dashboard/cryptocurrency"
+
         },
         error: (err) => {
-            console.log(err)
+            alert(err.responseJSON.error)
         }
     })
 })
