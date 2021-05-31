@@ -11,7 +11,7 @@ $("#buy-btn").click((e) => {
             window.location.href = "/dashboard/cryptocurrency"
         },
         error: (err) => {
-            alert(err.responseText)
+            alert(err.responseJSON.error)
         }
     })
 })
@@ -29,7 +29,7 @@ $("#sell-btn").click((e) => {
             window.location.href = "/dashboard/cryptocurrency"
         },
         error: (err) => {
-            alert(err.responseText)
+            alert(err.responseJSON.error)
         }
     })
 })

@@ -32,7 +32,7 @@ class Exchange:
                 }
             })
             return jsonify({"success": "Succesfully purchased coins"}), 200
-        return jsonify({"error": "Insufficient balance"}), 400
+        return jsonify({"error": f"Insufficient balance. \nYou tried to purchase DKK {round(value_in_dkk,5)} worth of BTC when you only have DKK {bank_account['balance']}"}), 400
         
             
     @staticmethod
@@ -62,4 +62,4 @@ class Exchange:
                 }
             })
             return jsonify({"success": "Succesfully sold coins"}), 200
-        return jsonify({"error": "Insufficient balance"}), 400
+        return jsonify({"error": f"Insufficient balance. \nYou tried to sell BTC {coins} when you only have BTC{round(crypto_wallet['balance'], 5)}"}), 400

@@ -55,8 +55,9 @@ def user_logout():
 @login_required
 def cryptocurrency():
     crypto_wallet = database.connect()["bank"]["crypto_wallets"].find_one({"_id": ObjectId(session["user"]["crypto_wallet"])})
+    bank_account = database.connect()["bank"]["bank_accounts"].find_one({"_id": ObjectId(session["user"]["bank_account"])})
     priceData = Cryptocurrency().get_data()
-    return render_template("cryptocurrency.html", priceData=priceData, crypto_wallet=crypto_wallet)
+    return render_template("cryptocurrency.html", priceData=priceData, crypto_wallet=crypto_wallet, bank_account=bank_account)
 
 @app.route('/dashboard/cryptocurrency/buy', methods=["POST"])
 @login_required
