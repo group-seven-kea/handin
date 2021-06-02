@@ -38,6 +38,8 @@ class Account:
 
     def register(self):
         """ Creates an user object, and inserts the account into the database and starts a new session. """
+        if self.fields_not_empty(request, ["first_name", "last_name", "age", "CPR", "email", "phone_number", "password", "confirm_password"]):
+            return jsonify({"error": "Some fields are empty"}), 400
         user = self.create_user_object(request)
         if request.form.get("password") != request.form.get("confirm_password"):
             return jsonify({"error": "Passwords did not match"}), 400
@@ -75,4 +77,15 @@ class Account:
             return True
         except:
             return False
+        
+    def fields_not_empty(self, request, fields):
+        """ Validate that the input fields are not empty  
+        
+        Args:
+            request: GET request from the form.
+            fields: List of fields.
+        """
+        for field in fields:
+            if request.form.get(field) == "":
+                return True
         
