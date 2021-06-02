@@ -60,8 +60,8 @@ class Account:
             "email": request.form.get("email"),
             "phone_number": request.form.get("phone_number"),
             "password": PasswordHasher().hash(request.form.get("password")),
-            "bank_account": str(BankAccount("Savings", 100.00).store_account().inserted_id),
-            "crypto_wallet": str(CryptoWallet("Bitcoin", 0.00075).store_account().inserted_id)
+            "bank_account": str(BankAccount("Savings", 1000.00).store_account().inserted_id),
+            "crypto_wallet": str(CryptoWallet("Bitcoin", 0.0875).store_account().inserted_id)
         }
         return user
 
