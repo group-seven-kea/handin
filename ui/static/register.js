@@ -8,7 +8,7 @@ $("#submit-btn").click((e) => {
         data: data,
         dataType: "json",
         success: (res) => {
-            window.location.href = "/user/login"
+            window.location.href = "/dashboard/cryptocurrency"
         },
         error: (err) => {
             console.log(err)
